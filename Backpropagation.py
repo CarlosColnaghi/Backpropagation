@@ -51,12 +51,14 @@ while((iteracoes > 0 and (iteracao < iteracoes)) or (iteracoes <= 0 and (np.max(
             t[i] = t[i] + z[i, j] * wZ[i, j]
         #cálculo das saídas da camada de saída 
         y[i] = (1 - np.power(np.exp(1), (-lamb * t[i]))) / (1 + np.power(np.exp(1), (-lamb * t[i])))
+    #impressão das saídas da rede
+    print(f"{iteracao+1}° Iteração do Backpropagation:", end="\n\n")
+    print("Vetor de saídas da rede para cada entrada:")
+    print(y, end="\n\n")
     #cálculo do erro (diferença entre a saída da rede e a saída desejada)
     eY = d - y
     #treinamento do backpropagation (atualização da matriz de pesos)
-    treinamento = False
     if(np.max(eY) >= e):
-        treinamento = True
         #cálculo do teta (derivada da função sigmoide) da camada de saída
         tetaY = 0.5 * lamb * (1 - np.power(y, 2))
         #cálculo do delta (erro do neurônio) da camada de saída
@@ -76,11 +78,6 @@ while((iteracoes > 0 and (iteracao < iteracoes)) or (iteracoes <= 0 and (np.max(
         #cálculo da nova matriz tridimensional de pesos da camada oculta
         for i in range(np.shape(w)[0]):
             w[i, :, :] = w[i, :, :] + np.multiply(sigmaZ, x)
-    #impressões dos resultados do backpropagation no terminal 
-    print(f"{iteracao+1}° Iteração do Backpropagation:", end="\n\n")
-    print("Vetor de saídas da rede para cada entrada:")
-    print(y, end="\n\n")
-    if (treinamento):
         print("Resultado do Treinamento:", end="\n\n")
         print("Matriz de pesos da camada de saída para cada entrada:")
         print(wZ, end="\n\n")
