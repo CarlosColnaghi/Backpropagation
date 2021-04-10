@@ -34,8 +34,8 @@ y = np.zeros(np.shape(x)[0])
 #quantidade iterações do backpropagation determinada pela entrada do usuário
 iteracoes = int(input("Digite o número de iterações do backpropagation (ou 0 para desconsiderar o número de iterações): "))
 iteracao = 0
-repetir = True
-while(repetir):
+#repetição do backpropagation
+while((iteracoes > 0 and (iteracao < iteracoes)) or (iteracoes <= 0 and (np.max(eY) >= e))):
     #cálculos do backpropagation
     for i in range(np.shape(x)[0]):
         #cálculo das saídas da camada oculta
@@ -85,9 +85,3 @@ while(repetir):
         print(w[i, :, :])
     print()
     iteracao += 1
-    if(iteracoes > 0):
-        if(iteracao >= iteracoes):
-            repetir = False
-    else:
-        if(np.max(eY) < e):
-            repetir = False
