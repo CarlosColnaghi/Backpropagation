@@ -32,7 +32,7 @@ t = np.zeros((np.shape(x)[0], 1))
 #vetor de saídas da camada de saída inicializadas com zero
 y = np.zeros(np.shape(x)[0])
 #quantidade iterações do backpropagation determinada pela entrada do usuário
-iteracoes = int(input("Digite o número de iterações da backpropagation: "))
+iteracoes = int(input("Digite o número de iterações do backpropagation (ou 0 para desconsiderar o número de iterações): "))
 iteracao = 0
 repetir = True
 while(repetir):
@@ -68,13 +68,23 @@ while(repetir):
     deltaZ = np.multiply(tetaZ, eZ)
     #cálculo do sigma da camada oculta
     sigmaZ = 2 * alfa * deltaZ
-    #cálculo da nova matriz de pesos
+    #cálculo da nova matriz de pesos da camada de saída
     wZ = wZ + (sigmaY * z.transpose()).transpose()
-    #cálculo da nova matriz tridimensional de pesos
+    #cálculo da nova matriz tridimensional de pesos da camada oculta
     for i in range(np.shape(w)[0]):
         w[i, :, :] = w[i, :, :] + np.multiply(sigmaZ, x)
+    #impressões dos resultados do backpropagation no terminal 
+    print(f"{iteracao+1}° Iteração do BackPropagation:", end="\n\n")
+    print("Vetor de saídas da rede para cada entrada:")
+    print(y, end="\n\n")
+    print("Resultado do Treinamento:", end="\n\n")
+    print("Matriz de pesos da camada de saída para cada entrada:")
+    print(wZ, end="\n\n")
+    for i in range(neuronios):
+        print(f"Matriz de pesos da camada oculta para cada entrada ({i+1}° neurônio):")    
+        print(w[i, :, :])
+    print()
     iteracao += 1
-    print(iteracao)
     if(iteracoes > 0):
         if(iteracao >= iteracoes):
             repetir = False
