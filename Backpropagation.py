@@ -1,3 +1,4 @@
+#Nome: Carlos R. O. Colnaghi RA: 209507 Termo: 9° Curso: Engenharia da Computação
 import numpy as np
 #matriz de entradas
 x = np.matrix("1 1 1; 1 -1 1; -1 -1 1; -1 1 1")
@@ -23,19 +24,19 @@ for i in range(neuronios):
 w = wAuxiliar
 #tranformação do vetor de pesos da camada de saída em uma matriz
 wZ = np.tile(wZ, (np.shape(x)[0], 1))
-#matriz de saídas intermediárias da camada oculta inicializadas com zero
-s = np.zeros((np.shape(x)[0], neuronios))
-#matriz de saídas da camada oculta inicializadas com zero
-z = np.zeros((np.shape(x)[0], neuronios+1))
-#vetor de saídas intermediárias da camada de saída inicializadas com zero
-t = np.zeros((np.shape(x)[0], 1))
-#vetor de saídas da camada de saída inicializadas com zero
-y = np.zeros(np.shape(x)[0])
 #quantidade iterações do backpropagation determinada pela entrada do usuário
 iteracoes = int(input("Digite o número de iterações do backpropagation (ou 0 para considerar apenas o limiar de erro): "))
 iteracao = 0
 #repetição do backpropagation
 while((iteracoes > 0 and (iteracao < iteracoes)) or (iteracoes <= 0 and (np.max(eY) >= e))):
+    #matriz de saídas intermediárias da camada oculta inicializadas com zero
+    s = np.zeros((np.shape(x)[0], neuronios))
+    #matriz de saídas da camada oculta inicializadas com zero
+    z = np.zeros((np.shape(x)[0], neuronios+1))
+    #vetor de saídas intermediárias da camada de saída inicializadas com zero
+    t = np.zeros((np.shape(x)[0], 1))
+    #vetor de saídas da camada de saída inicializadas com zero
+    y = np.zeros(np.shape(x)[0])
     #cálculos do backpropagation
     for i in range(np.shape(x)[0]):
         #cálculo das saídas da camada oculta
